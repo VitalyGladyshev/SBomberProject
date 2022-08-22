@@ -11,7 +11,7 @@ using namespace std;
 
 int main(void)
 {
-    FileLoggerSingletone::getInstance().OpenLogFile("log.txt");
+    LoggerSingletone::getInstance().OpenLogFile("log.txt");
 
     SBomber game;
 
@@ -33,7 +33,7 @@ int main(void)
 
     } while (!game.GetExitFlag());
 
-    FileLoggerSingletone::getInstance().CloseLogFile();
+    LoggerSingletone::getInstance().CloseLogFile();
 
     return 0;
 }
