@@ -25,6 +25,7 @@ int main(void)
 
         MyTools::ClrScr();
 
+        game.CommandExecuter();
         game.DrawFrame();
         game.MoveObjects();
         game.CheckObjects();
