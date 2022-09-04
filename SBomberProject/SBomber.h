@@ -51,22 +51,22 @@ private:
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
 
-    class BombIterator { // «Итератор» по объектам Bomb в массиве vecDynamicObj
+    class BombIterator { //                       Bomb           vecDynamicObj
         std::vector<DynamicObject*>& refArr;
         int curIndex;
     public:
         BombIterator(std::vector<DynamicObject*>& ref) : refArr(ref), curIndex(-1) { ++(*this); }
         
         void reset() { curIndex = -1; }
-        BombIterator& operator++ (); // префиксный инкремент
-        BombIterator& operator-- (); // префексный декремент
-        Bomb* operator*(); // операция разыменования итератора
-        bool operator==(BombIterator it); // проверка на лог. равенство итераторов
-        bool operator!=(BombIterator it); // проверка на лог. неравенство
+        BombIterator& operator++ (); //                     
+        BombIterator& operator-- (); //                     
+        Bomb* operator*(); //                                 
+        bool operator==(BombIterator it); //                .                     
+        bool operator!=(BombIterator it); //                .            
     };
 
-    // получаем итератор настроенный на начало массива
+    //                                                
     BombIterator begin() { BombIterator it(vecDynamicObj); return it; }
-    // итератор в конечном состоянии
+    //                              
     BombIterator end() { BombIterator it(vecDynamicObj); it.reset(); return it; }
 };

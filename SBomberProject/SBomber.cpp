@@ -93,7 +93,7 @@ SBomber::~SBomber()
     }
 }
 
-SBomber::BombIterator& SBomber::BombIterator::operator++ () // префиксный инкремент
+SBomber::BombIterator& SBomber::BombIterator::operator++ () //                     
 {
     curIndex++;
     if (curIndex == -1)
@@ -114,7 +114,7 @@ SBomber::BombIterator& SBomber::BombIterator::operator++ () // префиксный инкрем
     return *this;
 }
 
-SBomber::BombIterator& SBomber::BombIterator::operator-- () // префексный декремент
+SBomber::BombIterator& SBomber::BombIterator::operator-- () //                     
 {
     if (curIndex == -1)
         curIndex = refArr.size() - 1;
@@ -130,12 +130,12 @@ SBomber::BombIterator& SBomber::BombIterator::operator-- () // префексный декрем
     return *this;
 }
 
-Bomb* SBomber::BombIterator::operator*() // операция разыменования итератора
+Bomb* SBomber::BombIterator::operator*() //                                 
 {
     return dynamic_cast<Bomb*>(refArr.at(curIndex));
 }
 
-bool SBomber::BombIterator::operator==(BombIterator it) // проверка на лог. равенство итераторов
+bool SBomber::BombIterator::operator==(BombIterator it) //                .                     
 {
     if (curIndex == it.curIndex &&
         refArr == it.refArr)
@@ -145,7 +145,7 @@ bool SBomber::BombIterator::operator==(BombIterator it) // проверка на лог. раве
     return false;
 }
 
-bool SBomber::BombIterator::operator!=(BombIterator it) // проверка на лог. неравенство
+bool SBomber::BombIterator::operator!=(BombIterator it) //                .            
 {
     return !(*this == it);
 }
@@ -186,7 +186,7 @@ void SBomber::CheckBombsAndGround()
     const double y = pGround->GetY();
     for (size_t i = 0; i < vecBombs.size(); i++)
     {
-        if (vecBombs[i]->GetY() >= y) // Пересечение бомбы с землей
+        if (vecBombs[i]->GetY() >= y) //                           
         {
             pGround->AddCrater(vecBombs[i]->GetX());
             CheckDestoyableObjects(vecBombs[i]);
