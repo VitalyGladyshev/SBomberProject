@@ -93,6 +93,63 @@ SBomber::~SBomber()
     }
 }
 
+SBomber::BombIterator& SBomber::BombIterator::operator++ () // префиксный инкремент
+{
+    curIndex++;
+    if (curIndex == -1)
+        curIndex = 0;
+
+    for (; curIndex < refArr.size(); curIndex++)
+    {
+        if (dynamic_cast<Bomb*>(refArr[curIndex]) != nullptr)
+        {
+            break;
+        }
+    }
+
+    if (curIndex == refArr.size())
+    {
+        curIndex = -1;
+    }
+    return *this;
+}
+
+SBomber::BombIterator& SBomber::BombIterator::operator-- () // префексный декремент
+{
+    if (curIndex == -1)
+        curIndex = refArr.size() - 1;
+    
+    for (; curIndex >= 0; curIndex--)
+    {
+        if (dynamic_cast<Bomb*>(refArr[curIndex]) != nullptr)
+        {
+            break;
+        }
+    }
+    
+    return *this;
+}
+
+Bomb* SBomber::BombIterator::operator*() // операция разыменования итератора
+{
+    return dynamic_cast<Bomb*>(refArr.at(curIndex));
+}
+
+bool SBomber::BombIterator::operator==(BombIterator it) // проверка на лог. равенство итераторов
+{
+    if (curIndex == it.curIndex &&
+        refArr == it.refArr)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool SBomber::BombIterator::operator!=(BombIterator it) // проверка на лог. неравенство
+{
+    return !(*this == it);
+}
+
 void SBomber::MoveObjects()
 {
     LoggerSingletone::getInstance().WriteToLog(string(__FUNCTION__) + " was invoked");
@@ -124,7 +181,7 @@ void SBomber::CheckPlaneAndLevelGUI()
 
 void SBomber::CheckBombsAndGround() 
 {
-    vector<Bomb*> vecBombs = FindAllBombs();
+    std::vector<Bomb*> vecBombs = FindAllBombs();
     Ground* pGround = FindGround();
     const double y = pGround->GetY();
     for (size_t i = 0; i < vecBombs.size(); i++)
@@ -223,17 +280,15 @@ Ground* SBomber::FindGround() const
     return nullptr;
 }
 
-vector<Bomb*> SBomber::FindAllBombs() const
+vector<Bomb*> SBomber::FindAllBombs()
 {
     vector<Bomb*> vecBombs;
 
-    for (size_t i = 0; i < vecDynamicObj.size(); i++)
+    BombIterator it = begin();
+    
+    for (; it != end(); ++it)
     {
-        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
-        if (pBomb != nullptr)
-        {
-            vecBombs.push_back(pBomb);
-        }
+        vecBombs.push_back(*it);
     }
 
     return vecBombs;

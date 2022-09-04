@@ -38,7 +38,7 @@ private:
     Plane * FindPlane() const;
     LevelGUI * FindLevelGUI() const;
     std::vector<DestroyableGroundObject*> FindDestoyableGroundObjects() const;
-    std::vector<Bomb*> FindAllBombs() const;
+    std::vector<Bomb*> FindAllBombs();
 
     void DropBomb();
 
@@ -50,4 +50,23 @@ private:
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
+
+    class BombIterator { // «Итератор» по объектам Bomb в массиве vecDynamicObj
+        std::vector<DynamicObject*>& refArr;
+        int curIndex;
+    public:
+        BombIterator(std::vector<DynamicObject*>& ref) : refArr(ref), curIndex(-1) { ++(*this); }
+        
+        void reset() { curIndex = -1; }
+        BombIterator& operator++ (); // префиксный инкремент
+        BombIterator& operator-- (); // префексный декремент
+        Bomb* operator*(); // операция разыменования итератора
+        bool operator==(BombIterator it); // проверка на лог. равенство итераторов
+        bool operator!=(BombIterator it); // проверка на лог. неравенство
+    };
+
+    // получаем итератор настроенный на начало массива
+    BombIterator begin() { BombIterator it(vecDynamicObj); return it; }
+    // итератор в конечном состоянии
+    BombIterator end() { BombIterator it(vecDynamicObj); it.reset(); return it; }
 };
