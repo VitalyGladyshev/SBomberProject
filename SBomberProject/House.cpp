@@ -33,16 +33,46 @@ bool House::isInside(double x1, double x2) const
 void House::Draw() const
 {
 	MyTools::SetColor(CC_Yellow);
-	GotoXY(x, y - 5);
-	cout << "  ########  ";
-	GotoXY(x, y - 4);
-	cout << "##        ##";
-	GotoXY(x, y - 3);
-	cout << "############";
-	GotoXY(x, y - 2);
-	cout << "#          #";
-	GotoXY(x, y - 1);
-	cout << "#          #";
-	GotoXY(x, y);
-	cout << "############";
+
+	for (int i = 0; i < vecHouse.size(); i++)
+	{
+		GotoXY(x, y - vecHouse.size() + 1 + i);
+		cout << vecHouse[i];
+	}
+}
+
+void HouseBuilderA::buildBlock()
+{
+	pHouse->vecHouse.clear();
+	pHouse->vecHouse.push_back("            ");
+	pHouse->vecHouse.push_back("  ########  ");
+	pHouse->vecHouse.push_back("##        ##");
+	pHouse->vecHouse.push_back("#          #");
+	pHouse->vecHouse.push_back("#          #");
+	pHouse->vecHouse.push_back("############");
+}
+
+void HouseBuilderA::buildChimney()
+{
+	if(pHouse->vecHouse.size() > 0)
+		pHouse->vecHouse[0] = "       ##   ";
+}
+
+void HouseBuilderA::buildWindows()
+{
+	if (pHouse->vecHouse.size() >= 4)
+		pHouse->vecHouse[3] = "#  ##  ##  #";
+}
+
+House* HouseDirector::createHouse(HouseBuilder& builder) 
+{
+	builder.createHouse();
+
+	builder.buildBlock();
+	if (_bChimney)
+		builder.buildChimney();
+	if(_bWindows)
+		builder.buildWindows();
+
+	return builder.getHouse();
 }

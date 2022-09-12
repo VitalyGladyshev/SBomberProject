@@ -59,7 +59,9 @@ SBomber::SBomber()
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
 
-    House * pHouse = new House;
+    HouseDirector hDirector;
+    HouseBuilderA hBuilder;
+    House* pHouse = hDirector.createHouse(hBuilder); // new House;
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
