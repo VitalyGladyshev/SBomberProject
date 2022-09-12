@@ -42,7 +42,6 @@ public:
 
 class HouseBuilderA : public HouseBuilder
 {
-	//~HouseBuilderA() { if (pHouse) delete pHouse; }
 public:
 
 	void createHouse() { pHouse = new House; }

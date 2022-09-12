@@ -61,7 +61,7 @@ SBomber::SBomber()
 
     HouseDirector hDirector;
     HouseBuilderA hBuilder;
-    House* pHouse = hDirector.createHouse(hBuilder); // new House;
+    House* pHouse = hDirector.createHouse(hBuilder);
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
