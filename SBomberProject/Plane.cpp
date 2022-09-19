@@ -3,7 +3,6 @@
 
 #include "Plane.h"
 #include "MyTools.h"
-#include "Visitor.h"
 
 using namespace std;
 using namespace MyTools;
@@ -19,9 +18,4 @@ void Plane::Draw() const
     cout << "\\\\\\\\";
     GotoXY(x + 3, y + 1);
     cout << "////";
-}
-
-void Plane::accept(Visitor& v)
-{
-    v.visit(this);
 }

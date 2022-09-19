@@ -7,7 +7,6 @@
 #include "Bomb.h"
 #include "Ground.h"
 #include "Tank.h"
-#include "Visitor.h"
 
 class SBomber
 {
@@ -46,8 +45,6 @@ private:
     std::vector<DynamicObject*> vecDynamicObj;
     std::vector<GameObject*> vecStaticObj;
     
-    LogVisitor logVisitor;
-
     bool exitFlag;
 
     uint64_t startTime, finishTime, passedTime;
