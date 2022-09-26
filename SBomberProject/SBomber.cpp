@@ -9,6 +9,7 @@
 #include "Tank.h"
 #include "House.h"
 #include "FileLoggerSingletone.h"
+#include "Mediator.h"
 
 using namespace std;
 using namespace MyTools;
@@ -49,12 +50,14 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    Tank* pTank = new Tank;
+    Mediator* pMed = new Mediator(pGUI);
+
+    Tank* pTank = new Tank(pMed, "Tank 1");
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
 
-    pTank = new Tank;
+    pTank = new Tank(pMed, "Tank 2");
     pTank->SetWidth(13);
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);

@@ -40,6 +40,17 @@ void LevelGUI::Draw() const
     cout << "BombsNum: " << bombsNumber;
     GotoXY(62, 1);
     cout << "Score: " << score;
+
+    if (vecMessage.size())
+    {
+        GotoXY(6, height + 1);
+        cout << "Tank message: " << vecMessage.back();
+        if ((passedTime - messageTime) > 2000)
+        {
+            messageTime = passedTime;
+            vecMessage.pop_back();
+        }
+    }
 }
 
 void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew, int16_t scoreNew)
@@ -48,4 +59,9 @@ void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint
     fps = fpsNew;
     bombsNumber = bombsNumberNew;
     score = scoreNew;
+}
+
+void LevelGUI::AddMessage(string sMessage)
+{
+    vecMessage.push_back(sMessage);
 }
