@@ -42,7 +42,7 @@
     <ClCompile Include="House.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="FileLoggerSingletone.cpp">
+    <ClCompile Include="FileLogger.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="DestroyableGroundObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="FileLoggerSingletone.h">
+    <ClInclude Include="FileLogger.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

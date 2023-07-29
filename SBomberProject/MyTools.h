@@ -38,6 +38,8 @@ namespace MyTools {
 
     void SetColor(ConsoleColor color);
 
+    std::string GetCurDateTime();
+
 	//=============================================================================================
 
 };
